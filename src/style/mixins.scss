@@ -1,0 +1,10 @@
+@mixin font-set($font-family,$font-style,$font-weight){
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight;
+}
+@mixin adaptive-width{
+    max-width: 1200px;
+    margin: auto;
+}
+$main-color: rgb(181,0,0);
