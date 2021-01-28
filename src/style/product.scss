@@ -1,0 +1,37 @@
+.product{
+    @include adaptive-width;
+    // display: flex;
+    // justify-content: space-between;
+}
+.product_image{
+    width: 360px;
+}
+.product_content{
+
+}
+.product_content_description{
+
+}
+.product_content_props{
+    position: relative;
+}
+.product_content_props_line{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    @include font-set("PFDinTextUniversal",normal,500);
+    font-size: 26px;
+    color: white;
+    background: $main-color;
+    width: 100%;
+    padding: 8px 20px;
+    margin: 2px 0;
+}
+.product_content_props_line:nth-child(2n){
+        color: black;
+        background: transparent;
+}
+.line-splitter{
+    position: absolute;
+    left: 50%;
+}

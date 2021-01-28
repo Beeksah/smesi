@@ -25,79 +25,19 @@
         @include adaptive-width;
         font-size: 30px;
     }
-    a{
-        @include font-set("PFDinTextUniversal",normal,500);
-        margin-top: 40px;
-        font-size: 26px;
-        padding: 14px 28px;
-        color: rgb(200,200,200);
-        border: 2px solid rgb(200,200,200);
-        border-radius: 8px;
-        transition: 0.3s;
-        &:hover{
-            color: white;
-            border-color: white;
-        }
-    }
 }
-
-
-
-.catalog{
-    @include adaptive-width;
-    padding: 80px 0;
-    display: flex;
-}
-.catalog_list{
-    width: 25%;
-    position: relative;
-    li{
-        width: 100%;
-        position: relative;
-        @include font-set("PFDinTextUniversal",normal,500);
-        font-size: 22px;
-        padding: 6px 0;
-        border-bottom: 2px solid $main-color;
-        border-radius: 2px;
-        &:hover{
-            a{
-                color: $main-color;
-            }
-        }
-        &:last-child{
-            border-bottom: none;
-        }
-    }
-   
-    a{
-        transition: 0.3s;
-        color: gray;
-    }
-}
-.catalog_content{
-    width: 75%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.catalog_content_item{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: black;
-    width: 260px;
-    margin-bottom: 40px;
+.main-page_about_link{
+    @include font-set("PFDinTextUniversal",normal,500);
+    margin-top: 40px;
+    font-size: 26px;
+    padding: 14px 28px;
+    color: rgb(200,200,200);
+    border: 2px solid rgb(200,200,200);
+    border-radius: 8px;
     transition: 0.3s;
-    img{
-        width: 200px;
-    }
-    span{
-        margin: 12px 0;
-        font-size: 20px;
-        @include font-set("PFDinTextUniversal",normal,700);
-    }
     &:hover{
-        color: $main-color;
+        color: white;
+        border-color: white;
     }
 }
 

@@ -1,0 +1,59 @@
+.catalog{
+    @include adaptive-width;
+    padding: 80px 0;
+    display: flex;
+}
+.catalog_list{
+    width: 25%;
+    position: relative;
+    li{
+        width: 100%;
+        position: relative;
+        @include font-set("PFDinTextUniversal",normal,500);
+        font-size: 22px;
+        padding: 6px 0;
+        border-bottom: 1px solid $main-color;
+        &:hover{
+            a{
+                color: $main-color;
+            }
+        }
+        &:last-child{
+            border-bottom: none;
+        }
+    }
+   
+    a{
+        transition: 0.3s;
+        color: gray;
+    }
+}
+.catalog_content{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.catalog_content_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    width: 260px;
+    margin-bottom: 40px;
+    transition: 0.3s;
+    img{
+        width: 200px;
+    }
+    span{
+        height: 60px;
+        width: 90%;
+        margin: 12px 0;
+        font-size: 20px;
+        @include font-set("PFDinTextUniversal",normal,700);
+        text-align: center;
+    }
+    &:hover{
+        color: $main-color;
+    }
+}

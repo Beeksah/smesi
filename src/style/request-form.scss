@@ -1,0 +1,18 @@
+.request-form{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+.request-form_container{
+    width: 500px;
+    height: 300px;
+    background: white;
+    textarea{
+        resize: none;
+    }
+}
