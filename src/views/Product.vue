@@ -40,7 +40,7 @@ export default {
             }
         }
         this.product = product;
-        debugger; // eslint-disable-line
+        
 
     }
 }

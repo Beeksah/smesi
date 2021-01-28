@@ -1,13 +1,18 @@
 <template>
-    <div class="request-form" v-show="show_modal" @click.prevent="show_modal=false">
-        <div class="request-form_container" @click.prevent="">
+    <div class="request-form" v-show="show_modal" >
+        <form class="request-form_container" @click.prevent="formClick($event)"
+        >
             <span></span>
+            <ul>
+                <li :key="error" v-for="error in errors">{{error}}</li>
+            </ul>
             <p></p>
             <input placeholder="Ваше имя" type="text" v-model="name">
+            <vue-phone-number-input ></vue-phone-number-input>
             <input placeholder="Телефон" type="text" v-model="phone">
             <textarea placeholder="Сообщение" type="text" v-model="message"></textarea>
-            <button>Отправить</button>
-        </div>
+            <button @click="checkForm()">Отправить</button>
+        </form>
     </div>
     <header>
         <div class="header-top">
@@ -103,19 +108,62 @@
 </template>
 
 <script>
-
+//import VuePhoneNumberInput from 'vue-phone-number-input';
+//import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+ 
 
 export default {
   name: 'App',
   data: ()=>({
       show_modal: false,
+      click_form: false,
+        name: null,
+        phone: null,
+        message: null,
+        errors: []
   }),
   methods:{
       showModel(){
           this.show_modal = true;
       },
+    
+      checkForm(e){
+          let isEmpty = (v)=>v==null||v==""
+            debugger; // eslint-disable-line
+             this.errors = [];
+          if(!isEmpty(this.name) && !isEmpty(this.phone) && !isEmpty(this.message) ){
+              this.sendData({
+                  name:this.name,
+                  phone:this.phone,
+                  message:this.message
+              })
+              return true;
+          }
+         
+          if(this.name==null||this.name==""){
+              this.errors.push('Имя обязательно')
+          }
+          if(this.phone==null||this.phone==""){
+              this.errors.push("Номер телефона обязателен")
+          }
+          if(this.message==null||this.message==""){
+              this.errors.push("Сообщение обязательно")
+          }
+          e.preventDefault()
+      },
+      sendData(data){
+          console.log(data)
+      },
       hideModal(){
-          this.show_modal =false;
+          if(!this.click_form){
+            this.show_modal =false;
+          } 
+          this.click_form =false;
+         // debugger; // eslint-disable-line
+      },
+      formClick(){
+          this.click_form = true;
+          // debugger; // eslint-disable-line
       },
       submitMessage(){
           let data = { 
@@ -123,6 +171,7 @@ export default {
                 phone: this.phone,
                 message: this.message,
           }
+          // debugger; // eslint-disable-line
           console.log(data)  
 
       }
