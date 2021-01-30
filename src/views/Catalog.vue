@@ -3,10 +3,10 @@
         <ul class="catalog_list">
             <li v-for="item in categories" :key="item.id" @click="categorySelected(item)" 
             :class="{active: selectedCategory!=null && selectedCategory.id == item.id}"> 
-                <a>   -> {{item.name}}</a>
+                <a>→ {{item.name}}</a>
             </li>
              <li  @click="categorySelected(null)" :class="{active: selectedCategory == null}"> 
-                <a>   -> Все строительные смеси</a>
+                <a>→ Все строительные смеси</a>
             </li>
        
         </ul>

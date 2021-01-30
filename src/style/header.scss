@@ -16,6 +16,7 @@ header{
 .header-top_logo{
     display: flex;
     flex-direction: column;
+    color: black;
     img{
         width: 270px;
     }
@@ -61,7 +62,6 @@ header{
         @include font-set("PFDinTextUniversal",normal,700);
     }
     a{
-        transition: 0.3s;
         color: white;
         &:hover{
             border-bottom: 2px solid white;

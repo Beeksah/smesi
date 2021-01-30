@@ -1,25 +1,27 @@
 <template>
-    <div class="request-form" v-show="show_modal" >
-        <form class="request-form_container" @click.prevent="formClick($event)"
-        >
-            <span></span>
+    <div class="request-form_container" v-show="show_modal" @click.prevent="hideModal($event)" >
+        <form class="request-form" @click.prevent="formClick($event)">
+            <span>ОСТАВИТЬ ЗАЯВКУ</span>
             <ul>
                 <li :key="error" v-for="error in errors">{{error}}</li>
             </ul>
             <p></p>
             <input placeholder="Ваше имя" type="text" v-model="name">
-            <vue-phone-number-input ></vue-phone-number-input>
-            <input placeholder="Телефон" type="text" v-model="phone">
+         
+            <input placeholder="Телефон" type="text"    @input="handleUserInput" v-model="phone">
             <textarea placeholder="Сообщение" type="text" v-model="message"></textarea>
-            <button @click="checkForm()">Отправить</button>
+            <span class="form-success-line" v-show="send_email_success" style="color: black">Спасибо за заявку! Мы свяжемся с вами в ближайшее время</span>
+            <span class="form-success-error" v-show="send_email_error" style="color: black">Ошибка: заявка не отправлена!</span>
+            
+            <button @click.prevent="checkForm()">Отправить</button>
         </form>
     </div>
     <header>
         <div class="header-top">
-            <div class="header-top_logo">
+            <router-link to="/" class="header-top_logo">
                 <img src="/assets/img/logo-red.png">
                 <span>Сухие строительные смеси</span>
-            </div>
+            </router-link>
             <a class="header-top_call" href="tel:+79780169022">
                 <img src="/assets/img/phone-red.png">
                 <span>+7 (978) 016-90-22</span>
@@ -110,7 +112,7 @@
 <script>
 //import VuePhoneNumberInput from 'vue-phone-number-input';
 //import 'vue-phone-number-input/dist/vue-phone-number-input.css';
- 
+
 
 export default {
   name: 'App',
@@ -120,10 +122,35 @@ export default {
         name: null,
         phone: null,
         message: null,
-        errors: []
+        errors: [],
+        send_email_success:false,
+        send_email_error:false
   }),
   methods:{
+        handleUserInput(e) {
+      var replacedInput = e.target.value
+        .replace(/\D/g, "")
+        .match(/(\d)(\d{0,3})(\d{0,3})(\d{0,4})/);
+        if(replacedInput!=null){
+             this.phone =  !replacedInput[2]
+                ? '+' + replacedInput[1]
+                : '+' + replacedInput[1]+"(" +
+                replacedInput[2] +
+                ") " +
+                replacedInput[3] +
+                (replacedInput[3] ? "-" + replacedInput[4] : "");
+           
+            console.log( this.phone)
+        }
+     
+    },
       showModel(){
+          this.name=null;
+           this.phone=null;
+            this.message=null;
+          this.send_email_success = false;
+          this.send_email_error =false;
+          this.errors = []
           this.show_modal = true;
       },
     
@@ -152,6 +179,25 @@ export default {
           e.preventDefault()
       },
       sendData(data){
+          fetch("http://localhost:3000/sendemail",{
+              method:"POST",
+              headers:{
+                  "Content-Type":"application/json",
+                  
+              },
+              body: JSON.stringify(data)
+          }).then(a=>{
+              return a.json()
+          }).then(a=>{
+               //debugger; // eslint-disable-line
+              if(a.success){
+                  //TODODO  успешность
+   this.send_email_success = true;
+              } else {
+                  //TODO ошибка
+                     this.send_email_error = true;
+              }
+          })
           console.log(data)
       },
       hideModal(){
@@ -177,7 +223,7 @@ export default {
       }
   },
   components: {
-    
+   
   }
 }
 </script>

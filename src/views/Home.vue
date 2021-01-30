@@ -1,4 +1,14 @@
 <template>
+ <carousel :items-to-show="1.5">
+    <slide v-for="slide in 10" :key="slide">
+      {{ slide }}
+    </slide>
+
+    <template #addons>
+      <navigation />
+      <pagination />
+    </template>
+  </carousel>
     <!-- <div class="owl-carousel owl-theme">
         <div class="item"><h4>1</h4></div>
         <div class="item"><h4>2</h4></div>
@@ -46,6 +56,8 @@
     </div>
 </template>
 <script>
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 export default {
     mounted() {
         this.$nextTick(() => {
@@ -55,6 +67,12 @@ export default {
         console.log(el);
         el && el.scrollIntoView();
         })
+    },
+    components:{
+          Carousel,
+    Slide,
+    Pagination,
+    Navigation,
     }
 }
 </script>
