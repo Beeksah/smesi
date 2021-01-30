@@ -1,7 +1,20 @@
 <template>
- <carousel :items-to-show="1.5">
-    <slide v-for="slide in 10" :key="slide">
-      {{ slide }}
+ <carousel :items-to-show="1">
+    <slide v-for="slide in 3" :key="slide">
+     <div>
+         <div v-if="slide==1">
+
+             Slide 1 
+         </div>
+          <div v-if="slide==2">
+
+             Slide 2
+         </div>
+           <div v-if="slide==3">
+
+             Slide 3
+         </div>
+     </div>
     </slide>
 
     <template #addons>
@@ -61,11 +74,15 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 export default {
     mounted() {
         this.$nextTick(() => {
-        console.log(this.$route.hash);
-        const el = document.querySelector(this.$route.hash);
-        
-        console.log(el);
-        el && el.scrollIntoView();
+            let selector = this.$route.hash;
+           
+            if(selector){
+                 console.log(selector);
+                const el = document.querySelector(selector);
+                
+                console.log(el);
+                el && el.scrollIntoView();
+            }
         })
     },
     components:{

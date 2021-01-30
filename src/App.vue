@@ -94,8 +94,9 @@
                             </router-link>
                         </li>
                         <li>
-                            <router-link :to="{path:'/',hash:'#contacts'}">
-                                КОНТАКТЫ
+                            <router-link :to="{path:'/',hash:'#contacts'}"  >
+                             <span @click="contactsClick()">КОНТАКТЫ</span>
+                                
                             </router-link>
                         </li>
                     </ul>
@@ -217,9 +218,22 @@ export default {
                 phone: this.phone,
                 message: this.message,
           }
-          // debugger; // eslint-disable-line
+          
           console.log(data)  
 
+      },
+      contactsClick(){
+        this.$nextTick(() => {
+                let selector = this.$route.hash;
+                debugger; // eslint-disable-line
+                if(selector){
+                    console.log(selector);
+                    const el = document.querySelector(selector);
+                    debugger; // eslint-disable-line
+                    console.log(el);
+                    el && el.scrollIntoView();
+                }
+            })
       }
   },
   components: {
